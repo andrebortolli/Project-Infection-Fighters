@@ -24,17 +24,22 @@ public class PlayerScript : MonoBehaviour
     public GameObject projectile; //Reference to the projectile GameObject to be instantiated;
     public GameObject playerCannon; //Reference to the player's cannon. This is the position that the projectile will be instantiated;
     private Transform cannonTransform; //Reference to the player cannon's transform.
-    public float playerHorizontalSpeed = 200.0f; //Player horizontal movement speed.
-    public float playerVerticalSpeed = 200.0f; //Player vertical movement speed.
+    private static float playerDefaultHorizontalSpeed = 200.0f; //Player horizontal movement speed.
+    private static float playerDefaultVerticalSpeed = 200.0f; //Player vertical movement speed.
+    public float playerHorizontalSpeed = playerDefaultHorizontalSpeed; //Player horizontal movement speed.
+    public float playerVerticalSpeed = playerDefaultVerticalSpeed; //Player vertical movement speed.
     public string inputPlayerHorizontal = "HORIZONTAL0"; //Defaults to Player 1. Change in Unity's Inspector to the desired player controls.
     public string inputPlayerVertical = "VERTICAL0"; //Defaults to Player 1. Change in Unity's Inspector to the desired player controls.
     public string inputPlayerShoot = "GREEN0"; //Defaults to Player 1. Change in Unity's Inspector to the desired player controls.
-    public bool buffAutoShoot = true;
     private float nextFire;
     public float fireRate = 0.15f;
     public bool limitPlayerToScreenBounds = true;
     private float resizeOnShoot = 0.75f;
     private PlayerResizeOnShoot playerResizeOnShoot;
+
+    public bool buffAutoShoot = false;
+    public bool buffFasterMovement = false;
+    public float buffFasterMovementMultiplier = 1.5f;
 
     Vector2 MovementVelocity(string inputH, string inputV, float inputPlayerSpeedH, float inputPlayerSpeedV)
     {
@@ -43,7 +48,7 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log (string.Format("{0}: {1} | {2}: {3}", inputH, velocity.x, inputV, velocity.y));
         return velocity;
     }
-    void Shoot()
+    void Shoot(GameObject projectile)
     {
         playerResizeOnShoot.Shrink(resizeOnShoot);
         Instantiate(projectile, cannonTransform.position, cannonTransform.rotation);
@@ -66,6 +71,16 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (buffFasterMovement == true)
+        {
+            playerHorizontalSpeed = playerDefaultHorizontalSpeed * buffFasterMovementMultiplier;
+            playerVerticalSpeed = playerDefaultVerticalSpeed * buffFasterMovementMultiplier;
+        }
+        else
+        {
+            playerHorizontalSpeed = playerDefaultHorizontalSpeed;
+            playerVerticalSpeed = playerDefaultVerticalSpeed;
+        }
         rb2d.velocity = MovementVelocity(inputPlayerHorizontal, inputPlayerVertical, playerHorizontalSpeed, playerVerticalSpeed);
         if (limitPlayerToScreenBounds == true)
         {
@@ -81,9 +96,17 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetButton(inputPlayerShoot) && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-                Shoot();
+                Shoot(projectile);
             }
         }
+        else
+        {
+            if (Input.GetButtonDown(inputPlayerShoot))
+            {
+                Shoot(projectile);
+            }
+        }
+
     }
     void OnTriggerEnter2D(Collider2D other)
     {

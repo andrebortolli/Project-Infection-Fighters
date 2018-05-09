@@ -305,6 +305,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1132023427586486, guid: aafc66eb16a3049429ec5f98e504927b,
         type: 2}
+    - target: {fileID: 114581469062169214, guid: 7569cf5bbb6044deca62cf121836da37,
+        type: 2}
+      propertyPath: buffAutoShoot
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7569cf5bbb6044deca62cf121836da37, type: 2}
   m_IsPrefabParent: 0
@@ -6002,6 +6007,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1132023427586486, guid: aafc66eb16a3049429ec5f98e504927b,
         type: 2}
+    - target: {fileID: 114581469062169214, guid: 7569cf5bbb6044deca62cf121836da37,
+        type: 2}
+      propertyPath: buffAutoShoot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114581469062169214, guid: 7569cf5bbb6044deca62cf121836da37,
+        type: 2}
+      propertyPath: buffFasterMovement
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7569cf5bbb6044deca62cf121836da37, type: 2}
   m_IsPrefabParent: 0
