@@ -13,7 +13,8 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb2d; //Reference to the player's Rigidbody2D;
     private Transform trsfm; //Reference to the player's Transform;
     public int playerID = 0;
-    public float life = 10.0f; //Player Life;
+    private static float defaultLife = 10.0f; //Player Life;
+    private float life = defaultLife;
     public float Life
     {
         get
@@ -40,6 +41,8 @@ public class PlayerScript : MonoBehaviour
     public bool buffAutoShoot = false;
     public bool buffFasterMovement = false;
     public float buffFasterMovementMultiplier = 1.5f;
+    public bool buffIgnoreConstantDamage = false;
+
 
     Vector2 MovementVelocity(string inputH, string inputV, float inputPlayerSpeedH, float inputPlayerSpeedV)
     {
@@ -123,7 +126,7 @@ public class PlayerScript : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == bacteriaTag)
+        if (other.gameObject.tag == bacteriaTag && buffIgnoreConstantDamage == false)
         {
             this.life -= bacteriaDamageOnTriggerStay;
             if (this.life <= 0.0f)
