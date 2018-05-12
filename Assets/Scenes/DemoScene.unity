@@ -5830,7 +5830,7 @@ GameObject:
   - component: {fileID: 2023226019}
   - component: {fileID: 2023226018}
   m_Layer: 0
-  m_Name: spr_spawner
+  m_Name: buffFasterMovement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

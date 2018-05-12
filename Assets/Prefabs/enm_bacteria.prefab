@@ -424,7 +424,7 @@ MonoBehaviour:
   followPlayer: 1
   followSpeedMultiplier: 0.009
   followSpeed: 5
-  debuffTakeMoreDamage: 1
+  debuffTakeMoreDamage: 0
   debuffTakeMoreDamageMultiplier: 1.75
 --- !u!114 &114339517590889832
 MonoBehaviour:
