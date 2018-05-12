@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
     public float bgScrollSpeed;
+    public GameObject mainMenu, playMenu, tutorialMenu, settingsMenu, aboutMenu;
+
     void Update()
     {
         //If ESC key is pressed, quit application.
@@ -14,23 +17,52 @@ public class MainMenuScript : MonoBehaviour
             Application.Quit();
         }
     }
-	public void ButtonPlay()
+	public void MainMenuButtonPlay()
 	{
-		SceneManager.LoadScene("DemoScene");
+        mainMenu.SetActive(false);
+        playMenu.SetActive(true);
+		//SceneManager.LoadScene("DemoScene");
 	}
-	public void ButtonInstructions()
+	public void MainMenuButtonTutorial()
 	{
-		
-	}
-	public void ButtonControls()
+        mainMenu.SetActive(false);
+        tutorialMenu.SetActive(true);
+    }
+	public void MainMenuButtonSettings()
 	{
-		
-	}
-	public void ButtonExit()
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+    public void MainMenuButtonAbout()
+    {
+        mainMenu.SetActive(false);
+        aboutMenu.SetActive(true);
+    }
+    public void MainMenuButtonExit()
 	{
 		QuitGame();
 	}
-	public void QuitGame()
+    public void PlayMenuBackButton()
+    {
+        playMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+    public void TutorialMenuBackButton()
+    {
+        tutorialMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+    public void SettingsMenuBackButton()
+    {
+        settingsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+    public void AboutMenuBackButton()
+    {
+        aboutMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+    public void QuitGame()
 	{
      // save any game data here
      #if UNITY_EDITOR
